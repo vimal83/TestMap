@@ -9,12 +9,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
     private GoogleMap mMap;
 
@@ -26,7 +27,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
+
 
 
     /**
@@ -58,5 +62,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 .strokeColor(Color.RED));
 
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng position) {
+                 mMap.addMarker(new MarkerOptions().position(position));
+               /* mMap.addMarker(new MarkerOptions()
+                        .position(position)
+                        .title("your title")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.foodmapicon)));*/
+            }
+        });
     }
+
 }
